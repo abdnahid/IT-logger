@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
 
-const AddLogModal = () => {
+const EditLogModal = () => {
     const [message,setMessage]=useState('');
     const [attention,setAttention]=useState(false);
     const [tech,setTech]=useState('');
     const handleSubmit = ()=>{
         if (message===''&&tech==='') {
-            M.toast({html:'Log message and Tech field should not be empty'})
+            M.toast({html:'Log message and Technician field should not be empty'})
         }else if (message==='') {
             M.toast({html:'Please Add Log message before submitting'})
         }else if (tech==='') {
@@ -21,7 +21,7 @@ const AddLogModal = () => {
         
     }
     return (
-        <div id='add-log-modal' className='modal' style={modalStyle}>
+        <div id='edit-log-modal' className='modal' style={modalStyle}>
             <div className="modal-content">
                 <h4>Enter System Log</h4>
                 <div className="row">
@@ -63,4 +63,4 @@ const modalStyle={
     height:'75%'
 };
 
-export default AddLogModal
+export default EditLogModal
