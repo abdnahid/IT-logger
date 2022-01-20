@@ -1,10 +1,19 @@
-import React,{useState} from 'react'
-import M from 'materialize-css/dist/js/materialize.min.js'
+import React,{useEffect, useState} from 'react';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import { connect } from 'react-redux';
+import { updateLogs } from '../../actions/logActions';
 
-const EditLogModal = () => {
+const EditLogModal = ({current,updateLogs}) => {
     const [message,setMessage]=useState('');
     const [attention,setAttention]=useState(false);
     const [tech,setTech]=useState('');
+    useEffect(()=>{
+        if (current) {
+            setMessage(current.message);
+            setAttention(current.attention);
+            setTech(current.tech);
+        }
+    },[current]);
     const handleSubmit = ()=>{
         if (message===''&&tech==='') {
             M.toast({html:'Log message and Technician field should not be empty'})
@@ -13,7 +22,15 @@ const EditLogModal = () => {
         }else if (tech==='') {
             M.toast({html:'Please Add a Technician before submitting'})
         }else{
-            console.log(message,attention,tech);
+            const updatedLog = {
+                id:current.id,
+                message,
+                attention,
+                tech,
+                date:new Date()
+            }
+            updateLogs(updatedLog);
+            M.toast({html:`log updated by ${updatedLog.tech}`});
             setMessage('');
             setAttention(false);
             setTech('');
@@ -62,5 +79,6 @@ const modalStyle={
     width:'75%',
     height:'75%'
 };
+const mapStateToProps= (state)=>({current:state.log.current})
 
-export default EditLogModal
+export default connect(mapStateToProps,{updateLogs})(EditLogModal)

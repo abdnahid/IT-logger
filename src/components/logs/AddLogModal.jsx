@@ -1,22 +1,31 @@
 import React,{useState} from 'react'
-import M from 'materialize-css/dist/js/materialize.min.js'
+import M from 'materialize-css/dist/js/materialize.min.js';
+import { addLogs } from '../../actions/logActions';
+import { connect } from 'react-redux';
 
-const AddLogModal = () => {
+const AddLogModal = ({tech:{techs},addLogs}) => {
     const [message,setMessage]=useState('');
     const [attention,setAttention]=useState(false);
-    const [tech,setTech]=useState('');
+    const [technician,setTechnician]=useState('');
     const handleSubmit = ()=>{
-        if (message===''&&tech==='') {
+        if (message===''&&technician==='') {
             M.toast({html:'Log message and Tech field should not be empty'})
         }else if (message==='') {
             M.toast({html:'Please Add Log message before submitting'})
-        }else if (tech==='') {
+        }else if (technician==='') {
             M.toast({html:'Please Add a Technician before submitting'})
         }else{
-            console.log(message,attention,tech);
-            setMessage('');
+            const newLog = {
+                message,
+                attention,
+                technician,
+                date:new Date()
+            }
+            addLogs(newLog);
+            M.toast({html:`log added by ${technician}`});
             setAttention(false);
-            setTech('');
+            setMessage('');
+            setTechnician('');
         }
         
     }
@@ -32,12 +41,12 @@ const AddLogModal = () => {
                 </div>
                 <div className="row">
                     <div className="input-field">
-                        <select name="tech" value={tech} className='browser-default' onChange={e=>setTech(e.target.value)}>
+                        {techs===null?'Add a technitian before inserting a log':(
+                            <select name="tech" value={technician} className='browser-default' onChange={e=>setTechnician(e.target.value)}>
                             <option value="" disabled>Select Technician</option>
-                            <option value="Sam Wilson">Sam Wilson</option>
-                            <option value="Sam Smith">Sam Smith</option>
-                            <option value="Jack Wilson">Jack Wilson</option>
+                            {techs.map((tech)=>(<option value={tech.firstName+tech.lastName} key={tech.id}>{tech.firstName+tech.lastName}</option>))}
                         </select>
+                        )}
                     </div>
                 </div> 
                 <div className="row">
@@ -63,4 +72,6 @@ const modalStyle={
     height:'75%'
 };
 
-export default AddLogModal
+const mapStateToProps = state => ({tech:state.tech})
+
+export default connect(mapStateToProps,{addLogs})(AddLogModal)
