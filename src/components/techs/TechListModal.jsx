@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import TechItems from './TechItems';
 import { connect } from 'react-redux';
 import { getTechs } from '../../actions/techActions';

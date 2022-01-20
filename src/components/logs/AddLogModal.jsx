@@ -44,7 +44,7 @@ const AddLogModal = ({tech:{techs},addLogs}) => {
                         {techs===null?'Add a technitian before inserting a log':(
                             <select name="tech" value={technician} className='browser-default' onChange={e=>setTechnician(e.target.value)}>
                             <option value="" disabled>Select Technician</option>
-                            {techs.map((tech)=>(<option value={tech.firstName+tech.lastName} key={tech.id}>{tech.firstName+tech.lastName}</option>))}
+                            {techs.map((tech)=>(<option value={`${tech.firstName} ${tech.lastName}`} key={tech.id}>{`${tech.firstName} ${tech.lastName}`}</option>))}
                         </select>
                         )}
                     </div>

@@ -34,6 +34,20 @@
       "technician": "Final try",
       "date": "2022-01-20T01:30:47.934Z",
       "id": 7
+    },
+    {
+      "message": "Computer 002 Needs the ram checked",
+      "attention": true,
+      "technician": "Mattew Hayden",
+      "date": "2022-01-20T01:45:32.511Z",
+      "id": 8
+    },
+    {
+      "message": "workstation updated 523",
+      "attention": true,
+      "technician": "Mattew Hayden",
+      "date": "2022-01-20T02:08:56.218Z",
+      "id": 9
     }
   ],
   "techs": [
@@ -53,24 +67,14 @@
       "lastName": "Wilson"
     },
     {
-      "firstName": "lets",
-      "lastName": "try",
-      "id": 4
-    },
-    {
-      "firstName": "second",
-      "lastName": "try",
-      "id": 5
-    },
-    {
-      "firstName": "THIRD",
-      "lastName": "TRY",
-      "id": 6
-    },
-    {
       "firstName": "Final ",
       "lastName": "try",
       "id": 7
+    },
+    {
+      "firstName": "Mattew",
+      "lastName": "Hayden",
+      "id": 8
     }
   ]
 }

@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { deleteTechs } from '../../actions/techActions';
 
-const TechItems = ({tech}) => {
+const TechItems = ({tech,deleteTechs}) => {
     return (
         <li className='collection-item'>
             <div>
                 <span className='grey-text'>
                     <span className='black-text'>{tech.firstName} {tech.lastName} </span>
                 </span>
-                <a href="!#" className='secondary-content'>
+                <a href="!#" className='secondary-content' onClick={()=>deleteTechs(tech.id)}>
                     <i className='material-icons grey-text'>delete</i>
                 </a>
             </div>
@@ -15,4 +17,4 @@ const TechItems = ({tech}) => {
     )
 }
 
-export default TechItems
+export default connect(null,{deleteTechs})(TechItems)
